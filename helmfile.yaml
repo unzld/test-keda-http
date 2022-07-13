@@ -1,0 +1,26 @@
+repositories:
+- name: kedacore
+  url: https://kedacore.github.io/charts
+
+commonLabels:
+  purpose: keda
+  group: web
+
+releases:
+  - name: keda
+    namespace: keda
+    chart: kedacore/keda
+    version: 2.4.0
+
+  - name: keda-http-addon
+    namespace: keda
+    chart: kedacore/keda-add-ons-http
+    version: 0.3.0
+    values:
+      - interceptor:
+          proxy:
+            port: 80
+
+  - name: frontend
+    namespace: web
+    chart: ./charts/xkcd
