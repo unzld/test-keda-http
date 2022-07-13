@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: django
+  name: django
+spec:
+  selector:
+    matchLabels:
+      app: django
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: django
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+    spec:
+      enableServiceLinks: false
+      containers:
+        - image: gcr.io/google-samples/hello-app:1.0
+          imagePullPolicy: Always
+          name: django
+          ports:
+            - containerPort: 5000
+          env:
+            - name: PORT
+              value: "5000"
+status: {}

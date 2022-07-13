@@ -29,3 +29,7 @@ releases:
     chart: ./charts/xkcd
     needs:
       - keda-http-addon
+  
+  - name: backend
+    namespace: web
+    chart: ./charts/backend
