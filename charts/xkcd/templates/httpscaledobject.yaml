@@ -1,3 +1,4 @@
+{{- if .Values.autoscaling.enabled -}}
 kind: HTTPScaledObject
 apiVersion: http.keda.sh/v1alpha1
 metadata:
@@ -8,7 +9,8 @@ spec:
     scaleTargetRef:
         deployment: {{ include "xkcd.fullname" . }}
         service: {{ include "xkcd.fullname" . }}
-        port: 80
+        port: 8080
     replicas:
         min: {{ .Values.autoscaling.http.minReplicas }}
         max: {{ .Values.autoscaling.http.maxReplicas }}
+{{- end }}
