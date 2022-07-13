@@ -13,14 +13,19 @@ releases:
     version: 2.4.0
 
   - name: keda-http-addon
-    namespace: keda
+    # must be in the same namespace as the scaled resource
+    namespace: web
     chart: kedacore/keda-add-ons-http
     version: 0.3.0
+    needs:
+      - keda
     values:
       - interceptor:
           proxy:
-            port: 80
+            port: 8080
 
   - name: frontend
     namespace: web
     chart: ./charts/xkcd
+    needs:
+      - keda-http-addon

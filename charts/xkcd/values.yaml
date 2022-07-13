@@ -39,7 +39,7 @@ securityContext: {}
   # runAsUser: 1000
 
 autoscaling:
-  enabled: false
+  enabled: true
   http:
     minReplicas: 1
     maxReplicas: 5
