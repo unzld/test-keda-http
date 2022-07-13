@@ -1,0 +1,16 @@
+{{- if .Values.autoscaling.enabled -}}
+kind: HTTPScaledObject
+apiVersion: http.keda.sh/v1alpha1
+metadata:
+    name: django
+spec:
+    host: {{ .Values.host }}
+    targetPendingRequests: {{ .Values.targetPendingRequests }}
+    scaleTargetRef:
+        deployment: django
+        service: django
+        port: {{ .Values.interceptorPort }}
+    replicas:
+        min: {{ .Values.autoscaling.http.minReplicas }}
+        max: {{ .Values.autoscaling.http.maxReplicas }}
+{{- end }}

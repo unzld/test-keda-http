@@ -8,28 +8,40 @@ commonLabels:
 
 releases:
   - name: keda
-    namespace: keda
+    namespace: web
     chart: kedacore/keda
     version: 2.4.0
 
-  - name: keda-http-addon
+  - name: keda-http
     # must be in the same namespace as the scaled resource
     namespace: web
     chart: kedacore/keda-add-ons-http
     version: 0.3.0
-    needs:
-      - keda
+    disableValidationOnInstall: true
+    disableValidation: true
+    installed: true
     values:
       - interceptor:
           proxy:
-            port: 8080
+            port: 80
 
   - name: frontend
     namespace: web
-    chart: ./charts/xkcd
-    needs:
-      - keda-http-addon
+    chart: ./charts/frontend
+    disableValidationOnInstall: true
+    disableValidation: true
+    installed: true
+    values:
+      - autoscaling:
+          enabled: true
   
   - name: backend
     namespace: web
     chart: ./charts/backend
+    disableValidationOnInstall: true
+    disableValidation: true
+    installed: true
+    values:
+      - autoscaling:
+          enabled: true
+  

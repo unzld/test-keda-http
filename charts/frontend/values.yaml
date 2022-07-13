@@ -5,5 +5,5 @@ autoscaling:
   http:
     minReplicas: 1
     maxReplicas: 5
-port: 5000
+port: 80
 interceptorPort: 80

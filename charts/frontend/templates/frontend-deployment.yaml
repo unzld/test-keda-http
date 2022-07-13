@@ -3,18 +3,18 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: django
-  name: django
+    app: frontend
+  name: frontend
 spec:
   selector:
     matchLabels:
-      app: django
+      app: frontend
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: django
+        app: frontend
       annotations:
         rollme: {{ randAlphaNum 5 | quote }}
     spec:
@@ -22,7 +22,7 @@ spec:
       containers:
         - image: gcr.io/google-samples/hello-app:1.0
           imagePullPolicy: Always
-          name: django
+          name: frontend
           ports:
             - containerPort: {{ .Values.port }}
           env:
